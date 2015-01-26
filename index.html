@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<title>EZ chat</title>
+		<link href="/css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="heartbeat-chat">
+			<button id="restart" onclick="reset_chat()">RESTART</button>
+			<button onclick="get_current_users()">RESTART</button>
+		</div>
+		<div class="popup-box chat-popup" id="narayan-prusty3" style="right: 260px; display: block;">
+			<div class="popup-head">
+				<div class="popup-head-left">All</div>
+				<div class="popup-head-right">
+					<a href="javascript:close_popup('');">✕</a>
+				</div>
+				<div style="clear: both"></div>
+			</div>
+			<div id="popup-messages" class="popup-messages">
+				<ul id="messages"></ul>
+			</div>
+			<div class="send-message">
+				<form id="message_form" action="/" method="GET">
+					<input id="m" autocomplete="off"/>
+				</form>
+			</div>
+		</div>
+		<div class="users-box">
+		    <input type="checkbox" />
+		    <label data-expanded="Close tab" data-collapsed="Show friends"></label>
+		    <div id="user-list">
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty1', 'Robert Sambuena');">Robert Sambuena</a>
+			    </div>
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty2', 'Jonathan Cepeda');">Jonathan Cepeda</a>
+			    </div>
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty3', 'Ronald Pabilonia');">Ronald Pabilonia</a>
+			    </div>
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty4', 'Ryan Casteneda');">Ryan Casteneda</a>
+			    </div>
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty5', 'Eshlee Bien Romero');">Eshlee Bien Romero</a>
+			    </div>
+			    <div class="users-box-content">
+			    	<a href="javascript:register_popup('narayan-prusty6', 'Perseus Laguarodie');">Perseus Laguarodie</a>
+			    </div>
+		    </div>
+		</div>
+	</body>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js"></script>
+</html>
