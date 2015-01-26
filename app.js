@@ -16,8 +16,8 @@ db.once('open', function (callback) {
       created_at: Date,
       sockets: []
   });
-  var Users = mongoose.model('users', users_schema);
-  var new_user = new Users({
+  var user_model = mongoose.model('users', users_schema);
+  var new_user = new user_model({
     id: 12,
     nickname: 'testboys',
     created_at: new Date(),
@@ -28,11 +28,11 @@ db.once('open', function (callback) {
     if (err) return console.error(err);
     console.log('new_user res',res);
   });
-  Users.find(function (err, new_user) {
+  user_model.find(function (err, new_user) {
     if (err) return console.error(err);
     console.log('find_all', new_user);
   });
-  Users.find({ name: /^testdata/ }, function (err, res) {
+  user_model.find({ name: /^testdata/ }, function (err, res) {
     if (err) return console.error(err);
     console.log('find', res);
   });
@@ -142,7 +142,8 @@ var chatuser = new ChatUser();
 
 //get current online users
 function check_all_user_status() {
-  var socket_ids = Object.keys(User.adapter.rooms['default_room']),
+  console.log('User.adapter.rooms[]',User.adapter.rooms['default_room']);
+  var socket_ids = Object.keys(User.adapter.rooms['default_room'] || {}),
       online_users = [],
       __current_users_arr = obj_to_array(chatuser.get());
       console.log('__current_users',__current_users);
