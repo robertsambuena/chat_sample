@@ -19,7 +19,7 @@ function Chat () {
 	this.add_message = function (chat_obj) {
 		var chat = JSON.parse(localStorage.getItem('chat'));
 		chat = chat?chat:[];
-		console.log('chat_obj',chat_obj);
+		console.log('chat_obj--',chat_obj);
 		chat.push(chat_obj);
 		localStorage.setItem('chat', JSON.stringify(chat));
 		return true;
@@ -30,6 +30,7 @@ function Chat () {
 	this.set_user = function (user) {
 		console.log('set_user',user);
 		localStorage.setItem('user', JSON.stringify(user));
+		console.log(JSON.stringify(user));
 		return true;
 	};
 	this.reset = function (argument) {
@@ -107,7 +108,8 @@ window.addEventListener("onbeforeunload", closing);
 window.addEventListener("onunload", closing);
 
 function append_an_announcement (user) {
-	e_message_box.innerHTML = e_message_box.innerHTML + '<li class="announcement"><span class="msg"><b>'+user.nick+'</b> is now connected.</span></li>';
+	console.log("user");
+	e_message_box.innerHTML = e_message_box.innerHTML + '<li class="announcement"><span class="msg"><b>'+user.nickname+'</b> is now connected.</span></li>';
 	document.getElementById('popup-messages').scrollTop = document.getElementById('popup-messages').scrollHeight + 99999;
 }
 
@@ -118,6 +120,7 @@ function append_a_message (chat) {
 		e_message_box.innerHTML = e_message_box.innerHTML + '<li class="'+row_msg_class+'"><span class="msg">' + chat.msg + '</span></li>';
 	}
     else {
+    	row_msg_class = 'other';
     	e_message_box.innerHTML = e_message_box.innerHTML + '<li class="'+row_msg_class+'"><span class="nick">' + chat.nick + ': </span><span class="msg">' + chat.msg + '</span></li>';
     }
   	document.getElementById('popup-messages').scrollTop = document.getElementById('popup-messages').scrollHeight + 99999;
@@ -129,6 +132,7 @@ function refresh_page (e_message_box, chat_obj) {
 		chat_obj.forEach(function(chat) {
 		    if (chat.type=='announcement') {
 				append_an_announcement(chat.data);
+
 			}
 			else if (chat.type=='message') {
 				append_a_message(chat.data);
@@ -167,9 +171,23 @@ function init (sid) {
 				'id': random + 'bert',
 				'nick': user.nickname
 			});
+			//append_an_announcement(user);
 			chat_storage.set_user(user);
 		}
 	}
 }
-
+function toggleMessage(t){
+	var divName = t.parentNode.getAttribute("id");
+	
+	if(document.getElementById(divName).classList.contains("hideMessage") == true){
+		var newCl = String(document.getElementById(divName).classList).replace(/hideMessage/g,'');
+		document.getElementById(divName).className = newCl;
+		t.parentNode.getElementsByClassName("send-message")[0].style.display = "block";
+	}
+	else{
+		document.getElementById(divName).className += " hideMessage";
+		//console.log(t.parentNode.getElementsByClassName("send-message")[0]);
+		t.parentNode.getElementsByClassName("send-message")[0].style.display = "none";
+	}
+}
 init();

@@ -3,15 +3,53 @@
 	<head>
 		<title>EZ chat</title>
 		<link href="/css" rel="stylesheet">
-	</head>
+		<style>
+		.popup-box .popup-messages #messages li{
+			margin-top: 5px;
+		}
+		.popup-box .popup-messages #messages li.self .msg{
+			background: rgb(255, 210, 212);
+			padding: 2px 5px;
+			border-radius: 4px;
+			margin-top: 5px;
+			text-align: right;
+			border: 1px solid rgb(250, 182, 182);
+
+		}
+		.popup-box .popup-messages #messages li.other .msg{
+			background: rgb(226, 225, 225);
+			padding: 2px 5px;
+			border-radius: 4px;
+			margin-top: 5px;
+			text-align: left;
+			border: 1px solid rgb(213, 206, 207)
+		}
+		.hideMessage{
+			height: 27px !important;
+			width: 150px !important;
+		}
+		.announcement{
+			text-align: center;
+		}
+		.announcement span.msg{
+			background: rgb(253, 145, 211);
+			padding: 2px 5px;
+			border: 1px solid rgb(236, 116, 202);
+			border-radius: 3px;
+		}
+		.popup-head:hover{
+			cursor: pointer;
+		}
+		</style>
+	</head> 	
 	<body>
 		<div class="heartbeat-chat">
 			<button id="restart" onclick="reset_chat()">RESTART</button>
 			<button onclick="get_current_users()">RESTART</button>
 		</div>
-		<div class="popup-box chat-popup" id="narayan-prusty3" style="right: 260px; display: block;">
-			<div class="popup-head">
-				<div class="popup-head-left">All</div>
+		<div class="popup-box chat-popup" id="narayan-prusty3" style="right: 260px; display: block;" name="parentName">
+			<div class="popup-head" onclick="toggleMessage(this);">
+				<div class="popup-head-left" >All</div>
 				<div class="popup-head-right">
 					<a href="javascript:close_popup('');">✕</a>
 				</div>
