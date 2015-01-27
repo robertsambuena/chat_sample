@@ -54,7 +54,8 @@ app.get('/css', function(req, res){
 
 //convert object to array
 function obj_to_array (obj) {
-  if ( obj!== null && typeof obj === 'object')
+  console.log(typeof(obj));
+  if ( obj!== null && typeof obj == 'object')
     return Object.keys(obj).map(function (key) {return obj[key]});
   return false;
 }
